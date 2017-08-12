@@ -95,7 +95,8 @@ begin_test "post-checkout"
   [ ! -e file1.dat ]
   [ ! -e file2.dat ]
   [ ! -e file5.dat ]
-  git checkout file1.dat file2.dat file5.dat
+  tree .git/lfs/objects
+  GIT_TRACE_PACKET=1 git checkout file1.dat file2.dat file5.dat
   [ "$(cat file1.dat)" == "file 1 updated commit 2" ]
   [ "$(cat file2.dat)" == "file 2 updated in branch2" ]
   [ "$(cat file5.dat)" == "file 5 creation in branch2" ]
